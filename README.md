@@ -9,13 +9,15 @@
 </table>
 
 ## Prerequisites
-#### Hardware
+### Hardware
 Our experiments are conducted on 8 x 64GB AMD MI250X GPUs. If you are using fewer GPUs or GPUs with less memory, consider the following adjustments to manage memory constraints:
-- Change `--deepspeed` to use `configs/zero3.json`
 - Set `--gradient_checkpointing` to `True`
-- Decrease `--per_device_train_batch_size`. To reproduce our results, the effective batch size should remain 512. This is calculated as: `number_of_gpus` * `per_device_train_batch_size` * `gradient_accumulation_steps`
+- Change `--deepspeed` to use `configs/zero3.json`
+- Decrease `--per_device_train_batch_size`.
 
-#### Dataset
+**Note:** To reproduce our results, the effective batch size should remain 512. This is calculated as: `number_of_gpus` * `per_device_train_batch_size` * `gradient_accumulation_steps`
+
+### Dataset
 The test dataset is available at [🤗 Jigsaw-R1](https://huggingface.co/jigsaw-r1).
 
 For the training data, please follow these instructions:
@@ -35,7 +37,7 @@ data_dir/
 <summary>Train on a single jigsaw puzzle size</summary>
 This script demonstrates how to train Qwen2.5-VL-3B (non-thinking) on a single jigsaw puzzle size (i.e., 2x1).
 
-```
+```bash
 python -m torch.distributed.run \
   --nnodes="1" \
   --nproc_per_node="8" \
@@ -74,7 +76,7 @@ The following script demonstrates training Qwen2.5-VL-3B (non-thinking) in a cur
 
 **Note:** One training step processes 64 unique prompts.
 
-```
+```bash
 python -m torch.distributed.run \
   --nnodes="1" \
   --nproc_per_node="8" \
@@ -112,7 +114,7 @@ python -m torch.distributed.run \
 <summary>Test on jigsaw puzzles</summary>
 Use this script to evaluate a model on jigsaw puzzle tasks.
 
-```
+```bash
 python test.py \
   --model_path $MODEL_PATH \
   --no-think \
@@ -130,7 +132,7 @@ python test.py \
 <summary>Test on downstream tasks</summary>
 Use this script to evaluate a model on  downstream tasks.
 
-```
+```bash
 python test.py \
   --model_path $MODEL_PATH \
   --no-think \
@@ -145,4 +147,12 @@ python test.py \
 * [VLM-R1](https://github.com/om-ai-lab/VLM-R1)
 
 ## Citation
-TODO
+```BibTeX
+@misc{wang2025jigsawr1,
+      title={Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles}, 
+      author={Zifu Wang and Junyi Zhu and Bo Tang and Zhiyu Li and Feiyu Xiong and Jiaqian Yu and Matthew B. Blaschko},
+      year={2025},
+      eprint={2505.23590},
+      archivePrefix={arXiv},
+}
+```
