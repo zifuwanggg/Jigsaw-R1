@@ -21,8 +21,8 @@ Our experiments are conducted on 8 x 64GB AMD MI250X GPUs. If you are using fewe
 The test dataset is available at [🤗 Jigsaw-R1](https://huggingface.co/jigsaw-r1).
 
 For the training data, please follow these instructions:
-* Download the `train2014` image from the [COCO dataset](http://images.cocodataset.org/zips/train2014.zip)
-* Organize your `data_dir` as follows, placing the `train2014` image folder and the [train2014.json](data/train2014.json) file accordingly
+* Download `train2014` images from the [COCO dataset](http://images.cocodataset.org/zips/train2014.zip)
+* Organize your `data_dir` as follows, placing the `train2014` folder and the [train2014.json](data/train2014.json) file accordingly
 ```
 data_dir/
 └── coco/
@@ -126,11 +126,38 @@ python test.py \
   --n 1 \
   --question_type "pair"
 ```
+
+Alternatively, the following Python script prepares jigsaw puzzle tasks in QA format, ready for processing within your own codebase.
+
+```python
+from utils.utils import create_input_helper
+
+inputs = create_input_helper(
+    dataset_name="coco",
+    dataset_split="test",
+    dataset_size=-1,
+    jigsaw=True,
+    jigsaw_seed=0,
+    m=2,
+    n=1,
+    n_c=4,
+    shuffle_mn=True,
+    mask_ratio=0,
+    width_min=0.1,
+    width_max=0.6,
+    height_min=0.1,
+    height_max=0.6,
+    forward=True,
+    question_type="pair",
+    think=False,
+    instruct_model=True
+)
+```
 </details>
 
 <details>
 <summary>Test on downstream tasks</summary>
-Use this script to evaluate a model on  downstream tasks.
+Use this script to evaluate a model on downstream tasks.
 
 ```bash
 python test.py \
@@ -139,6 +166,33 @@ python test.py \
   --dataset_name "cv_bench" \
   --dataset_split "test" \
   --no-jigsaw
+```
+
+Alternatively, the following Python script prepares downstream tasks in QA format, ready for processing within your own codebase.
+
+```python
+from utils.utils import create_input_helper
+
+inputs = create_input_helper(
+    dataset_name="cv_bench",
+    dataset_split="test",
+    dataset_size=-1,
+    jigsaw=False,
+    jigsaw_seed=0,
+    m=2,
+    n=1,
+    n_c=4,
+    shuffle_mn=True,
+    mask_ratio=0,
+    width_min=0.1,
+    width_max=0.6,
+    height_min=0.1,
+    height_max=0.6,
+    forward=True,
+    question_type="pair",
+    think=False,
+    instruct_model=True
+)
 ```
 </details>
 
