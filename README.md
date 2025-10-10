@@ -206,6 +206,6 @@ inputs = create_input_helper(
   title={Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles}, 
   author={Wang, Zifu and Zhu, Junyi and Tang, Bo and Li, Zhiyu and Xiong, Feiyu and Yu, Jiaqian and Blaschko, Matthew B.},
   journal={TMLR},
-  year={2025},
+  year={2025}
 }
 ```
