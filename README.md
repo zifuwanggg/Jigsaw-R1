@@ -202,11 +202,10 @@ inputs = create_input_helper(
 
 ## Citation
 ```BibTeX
-@misc{wang2025jigsawr1,
-      title={Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles}, 
-      author={Zifu Wang and Junyi Zhu and Bo Tang and Zhiyu Li and Feiyu Xiong and Jiaqian Yu and Matthew B. Blaschko},
-      year={2025},
-      eprint={2505.23590},
-      archivePrefix={arXiv},
+@artile{wang2025jigsawr1,
+  title={Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles}, 
+  author={Wang, Zifu and Zhu, Junyi and Tang, Bo and Li, Zhiyu and Xiong, Feiyu and Yu, Jiaqian and Blaschko, Matthew B.},
+  journal={TMLR},
+  year={2025},
 }
 ```
