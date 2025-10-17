@@ -1,10 +1,11 @@
-<h1 align="center"><a style="color:#9C276A">
-Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles</a></h1>
+<h1 align="center">
+Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles
+</h1>
 
 <h5 align="center">
- 
+
 [![arXiv](https://img.shields.io/badge/arXiv-2505.23590-AD1C18.svg?logo=arXiv)](https://arxiv.org/abs/2505.23590) 
-[![HuggingFace](https://img.shields.io/badge/🤗HuggingFace-Jigsaw–R1-FEE133.svg)](https://huggingface.co/jigsaw-r1)
+[![HuggingFace](https://img.shields.io/badge/🤗HuggingFace-Jigsaw–R1-FFD21E.svg)](https://huggingface.co/jigsaw-r1)
 
 ## Task Design
 An original image is divided into an $m$ × $n$ grid of patches, which are then randomly shuffled to create the jigsaw image. We consider two question types (full or pair) and two prompting strategies (thinking or non-thinking).
