@@ -1,9 +1,49 @@
 # Jigsaw-R1: A Study of Rule-based Visual Reinforcement Learning with Jigsaw Puzzles
 
+
+## Task Design
+An original image is divided into an $m$ × $n$ grid of patches, which are then randomly shuffled to create the jigsaw image. We consider two question types (full or pair) and two prompting strategies (thinking or non-thinking).
+
 <table>
  <tr>
   <td width="100%">
-   <img src="jigsaw.png" alt="">
+   <img src="figures/jigsaw.png" alt="">
+  </td>
+ </tr>
+</table>
+
+## Main Results
+Using jigsaw puzzles as our experimental framework, this research undertakes an in-depth exploration of multifaceted aspects within rule-based visual RL. Our investigation yields findings that address the following key research questions and we would like to specifically highlight the generalization capabilities of MLLMs trained with jigsaw puzzles. 
+
+<details>
+<summary>Research Question #1: How do contemporary MLLMs perform on the classic pretext task of jigsaw puzzles?</summary>
+Without task-specific training, the performance of contemporary MLLMs on the simplest jigsaw puzzles (i.e., 2x1) is comparable to random guessing. However, fine-tuning enables these models to effectively solve such puzzles with near-perfect accuracy. Importantly, these learned abilities generalize to more complex configurations (e.g., 3x1) not encountered during training.
+</details>
+
+<details>
+<summary>Research Question #2: Can MLLMs trained to solve jigsaw puzzles develop generalizable abilities applicable to other visual tasks?</summary>
+Training models on jigsaw puzzles enables generalization to downstream tasks. The effectiveness of this generalization is dependent on specific task configurations, including puzzle size, question type and training dataset.
+</details>
+
+<details>
+<summary>Research Question #3: Given that extended reasoning may be detrimental for some perceptual tasks, is an explicit thinking process still beneficial when employing rule-based visual RL to solve jigsaw puzzles?</summary>
+MLLMs can learn and generalize with or without an explicit reasoning process. However, open-source MLLMs typically show stronger performance in direct answering. As a result, even when trained to employ step-by-step reasoning, they tend to disregard the thinking process in deriving the final answer.
+</details>
+
+<details>
+<summary>Research Question #4: Considering that many visual tasks can be solved with concise outputs, does the aha moment still emerge in MLLMs trained on jigsaw puzzles?</summary>
+The aha moment, characterized by the sudden emergence of complex reasoning patterns, is not observed. Instead, these patterns are pre-existing within MLLMs and are readily elicited by tasks with inherent reasoning structures, like jigsaw puzzles. Furthermore, the frequency of these reasoning patterns demonstrably increases throughout training and in response to greater task difficulty.
+</details>
+
+<details>
+<summary>Research Question #5: How does supervised fine-tuning (SFT) compare with RL in terms of generalization?</summary>
+SFT generally demonstrates less effective generalization compared to RL. Besides, initiating training with a SFT cold start phase can make later RL optimization less effective.
+</details>
+
+<table>
+ <tr>
+  <td width="100%">
+   <img src="figures/results.png" alt="">
   </td>
  </tr>
 </table>
@@ -13,12 +53,12 @@
 Our experiments are conducted on 8 x 64GB AMD MI250X GPUs. If you are using fewer GPUs or GPUs with less memory, consider the following adjustments to manage memory constraints:
 - Set `--gradient_checkpointing` to `True`
 - Change `--deepspeed` to use `configs/zero3.json`
-- Decrease `--per_device_train_batch_size`.
+- Decrease `--per_device_train_batch_size`
 
-**Note:** To reproduce our results, the effective batch size should remain 512. This is calculated as: `number_of_gpus` * `per_device_train_batch_size` * `gradient_accumulation_steps`
+**Note:** To reproduce our results, the effective batch size should remain 512. This is calculated as: `number_of_gpus` * `per_device_train_batch_size` * `gradient_accumulation_steps`.
 
-### Dataset
-The test dataset is available at [🤗 Jigsaw-R1](https://huggingface.co/jigsaw-r1).
+### Datasets
+The test datasets are available at [🤗 Jigsaw-R1](https://huggingface.co/jigsaw-r1).
 
 For the training data, please follow these instructions:
 * Download `train2014` images from the [COCO dataset](http://images.cocodataset.org/zips/train2014.zip)
@@ -31,6 +71,12 @@ data_dir/
     │   └── ...
     └── train2014.json
 ```
+
+### Models
+[🤗 jigsaw-r1/jigsaw_pair_2x1_think](https://huggingface.co/jigsaw-r1/jigsaw_pair_2x1_think): Qwen2.5-VL-3B trained with 2x1 pair jigsaw puzzles (thinking).
+
+[🤗 jigsaw-r1/jigsaw_pair_2x1_nothink](https://huggingface.co/jigsaw-r1/jigsaw_pair_2x1_nothink): Qwen2.5-VL-3B trained with 2x1 pair jigsaw puzzles (non-thinking).
+
 
 ## Train
 <details>
